@@ -1,0 +1,25 @@
+import socket
+import sys
+
+
+HOST = 'localhost'
+PORT = 5008
+
+if __name__ == '__main__':
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    except socket.error as err:
+        print("创建socket实例失败")
+        print("原因：%s" % str(err))
+        sys.exit()
+
+    print(u"socket实例创建成功！")
+
+    try:
+        sock.connect((HOST, int(PORT)))
+        print("Socket 已经连接上目标主机：%s, 连接的目标主机端口：%s" % (HOST, PORT))
+        sock.shutdown(2)
+    except socket.error as err:
+        print("连接主机：%s, 端口：%s 失败" % (HOST, PORT))
+
+    sys.exit()
